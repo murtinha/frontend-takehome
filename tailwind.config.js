@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        nav: "900px",
+        mobile: "0px",
+        desktop: "769px",
       },
       colors: {
         background: {
@@ -90,6 +91,11 @@ module.exports = {
         "color-3": "hsl(var(--color-3))",
         "color-4": "hsl(var(--color-4))",
         "color-5": "hsl(var(--color-5))",
+        // Discord-like colors for login button
+        discord: {
+          bg: "#E1E8FF",
+          text: "#5865F2",
+        },
       },
       borderRadius: {
         lg: "0.5rem",
@@ -182,6 +188,10 @@ module.exports = {
         mono: ['"IBM Plex Mono"', "monospace"],
       },
     },
+  },
+  screens: {
+    mobile: { max: "1079px" },
+    desktop: "1080px",
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
