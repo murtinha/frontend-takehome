@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { formatDate } from "../../app/utils/date";
 import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
 
@@ -19,7 +20,7 @@ export default function ItemCard({
   mcVersion: string;
   language: string;
   downloads: number;
-  createdAt: string;
+  createdAt: Date | string;
   badges: string[];
   image: string;
 }) {
@@ -58,7 +59,7 @@ export default function ItemCard({
           </div>
           <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
             <HiOutlineSparkles className="w-4 h-4" />
-            <span className="text-sm">Created on {createdAt}</span>
+            <span className="text-sm">Created on {formatDate(createdAt)}</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
             {badgesWithColors.map((badge, index) => (

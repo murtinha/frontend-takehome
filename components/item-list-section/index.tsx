@@ -15,7 +15,7 @@ export default function ItemListSection() {
           mcVersion="1.21.5"
           language="Java"
           downloads={300}
-          createdAt="Mar 5, 2025"
+          createdAt="2025-03-05"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"
         />
