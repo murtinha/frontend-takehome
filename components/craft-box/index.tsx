@@ -3,6 +3,8 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../app/actions/create-item";
+import { deserializeBadges } from "../../app/utils/badge";
+import { useItemsStore } from "../../lib/stores/items-store";
 import { CreateItemSchema } from "../../lib/validations/item";
 import CraftLanguageSelector from "../craft-language-selector";
 import CraftTypeSelector from "../craft-type-selector";
@@ -11,6 +13,7 @@ import { CraftFormContext } from "./craft-form-context";
 
 export default function CraftBox() {
   const { enqueueSnackbar } = useSnackbar();
+  const { addItem } = useItemsStore();
   const form = useForm<CreateItemSchema>({
     defaultValues: {
       title: "",
@@ -28,7 +31,16 @@ export default function CraftBox() {
     try {
       const result = await createItem(data);
 
-      if (result.success) {
+      if (result.success && result.data) {
+        // Add the new item to the Zustand store
+        const newItem = {
+          ...result.data,
+          badges: deserializeBadges(result.data.badges),
+          status: result.data.status as "PENDING" | "SUCCESS" | "ERROR",
+          pendingPercentage: 0, // New items start at 0%
+        };
+        addItem(newItem);
+
         form.reset();
         enqueueSnackbar("Item created successfully!", {
           autoHideDuration: 3000,

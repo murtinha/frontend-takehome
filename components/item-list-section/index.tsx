@@ -1,57 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getItems, ItemWithBadges } from "../../app/actions/get-items";
+import { useEffect } from "react";
+import { useItemsStore } from "../../lib/stores/items-store";
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
 import Spinner from "../ui/spinner";
 
 export default function ItemListSection() {
-  const [items, setItems] = useState<ItemWithBadges[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { items, loading, error, fetchItems } = useItemsStore();
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        setLoading(true);
-        const fetchedItems = await getItems();
-        setItems(fetchedItems);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching items:", err);
-        setError("Failed to load items");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchItems();
-  }, []);
+  }, [fetchItems]);
 
   const handleRetry = (itemId: string) => {
     console.log("Retry clicked for item:", itemId);
-    // TODO: Implement retry logic
   };
 
   const handleDownload = (itemId: string) => {
     console.log("Download clicked for item:", itemId);
-    // TODO: Implement download logic
   };
 
   const handleRemix = (itemId: string) => {
     console.log("Remix clicked for item:", itemId);
-    // TODO: Implement remix logic
   };
 
   const handleEdit = (itemId: string) => {
     console.log("Edit clicked for item:", itemId);
-    // TODO: Implement edit logic
   };
 
   const handlePlay = (itemId: string) => {
     console.log("Play clicked for item:", itemId);
-    // TODO: Implement play logic
   };
 
   const mapStatus = (status: string): "pending" | "success" | "error" => {
