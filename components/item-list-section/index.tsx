@@ -1,3 +1,5 @@
+"use client";
+
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
 
@@ -17,6 +19,7 @@ export default function ItemListSection() {
           language="Java"
           downloads={300}
           createdAt="2025-03-05"
+          onRetry={() => null}
           status="pending"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"
@@ -29,6 +32,7 @@ export default function ItemListSection() {
           language="Java"
           downloads={300}
           createdAt="2025-03-05"
+          onRetry={() => null}
           status="error"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"
@@ -41,6 +45,7 @@ export default function ItemListSection() {
           language="Java"
           downloads={300}
           createdAt="2025-03-05"
+          onRetry={() => null}
           status="success"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"

@@ -1,14 +1,10 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
-import { FiEdit, FiPlay } from "react-icons/fi";
-import { GrRefresh } from "react-icons/gr";
 import { HiOutlineSparkles } from "react-icons/hi2";
-import { PiGitBranchThin } from "react-icons/pi";
 import { formatDate } from "../../app/utils/date";
 import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
-import FailedIcon from "../ui/icons/failed-icon";
-import LoadingRainbowButton from "../ui/loading-rainbow-button";
+import ItemCardActions from "./item-card-actions";
 
 export default function ItemCard({
   title,
@@ -31,14 +27,14 @@ export default function ItemCard({
   createdAt: Date | string;
   badges: string[];
   image: string;
-  status?: "pending" | "success" | "error";
+  status: "pending" | "success" | "error";
   pendingPercentage?: number;
-  onRetry?: () => void;
+  onRetry: () => void;
 }) {
   const badgesWithColors = getBadgeColor(badges);
 
   return (
-    <div className="flex w-full h-[80px] gap-2">
+    <div className="flex w-full min-h-[80px] gap-2 flex-wrap">
       <Image
         src="/creativemode-mobile.webp"
         alt="CreativeMode"
@@ -46,92 +42,53 @@ export default function ItemCard({
         height={80}
         className="w-20 h-20"
       />
-      <div className="flex py-2 w-full flex-col flex-1">
-        <div className="flex items-baseline">
-          <div className="text-2xl font-bold mr-4">{title}</div>
-          <div className="flex gap-2">
-            <Badge variant="outline" size="sm">
-              v{version}
-            </Badge>
-            <Badge variant="outline" size="sm">
-              MC {mcVersion}
-            </Badge>
-            <Badge variant="outline" size="sm">
-              {language}
-            </Badge>
-          </div>
-        </div>
-
-        <div className="flex items-center mt-2">
-          <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
-            <BsDownload className="w-4 h-4" />
-            <span className="text-sm">{downloads}</span>
-            <span className="text-sm">downloads</span>
-          </div>
-          <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
-            <HiOutlineSparkles className="w-4 h-4" />
-            <span className="text-sm">Created on {formatDate(createdAt)}</span>
-          </div>
-          <div className="flex items-center gap-2 flex-1">
-            {badgesWithColors.map((badge, index) => (
-              <Badge key={index} variant={badge.color} size="sm">
-                {badge.text}
+      <div className="flex items-center gap-2 flex-1">
+        <div className="flex py-2 w-full flex-col flex-1">
+          <div className="flex items-baseline flex-wrap gap-y-2">
+            <div className="text-2xl font-bold mr-4">{title}</div>
+            <div className="flex gap-2">
+              <Badge variant="outline" size="sm">
+                v{version}
               </Badge>
-            ))}
+              <Badge variant="outline" size="sm">
+                MC {mcVersion}
+              </Badge>
+              <Badge variant="outline" size="sm">
+                {language}
+              </Badge>
+            </div>
+          </div>
+
+          <div className="flex items-center mt-2 flex-wrap gap-y-2">
+            <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
+              <BsDownload className="w-4 h-4" />
+              <span className="text-sm">{downloads}</span>
+              <span className="text-sm">downloads</span>
+            </div>
+            <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
+              <HiOutlineSparkles className="w-4 h-4" />
+              <span className="text-sm">
+                Created on {formatDate(createdAt)}
+              </span>
+            </div>
+            <div className="flex items-center gap-2 flex-1">
+              {badgesWithColors.map((badge, index) => (
+                <Badge key={index} variant={badge.color} size="sm">
+                  {badge.text}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {status === "pending" && (
-        <div className="flex items-center ml-4">
-          <LoadingRainbowButton percentage={pendingPercentage} />
-        </div>
-      )}
-
-      {status === "error" && (
-        <div className="flex items-center ml-4">
-          <div className="flex items-center gap-2">
-            <button
-              disabled
-              className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-200 text-sm font-medium"
-            >
-              <FailedIcon />
-              <span>Failed</span>
-            </button>
-
-            <button
-              onClick={onRetry}
-              className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover "
-            >
-              <span>Retry</span>
-              <GrRefresh className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {status === "success" && (
-        <div className="flex items-center ml-4">
-          <div className="flex items-center gap-2">
-            <button className="flex items-center gap-2 px-4 py-3 bg-primary text-sm font-medium hover:bg-primary-hover">
-              <BsDownload className="w-4 h-4" />
-            </button>
-
-            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
-              <span>Remix</span>
-              <PiGitBranchThin className="w-4 h-4" />
-            </button>
-
-            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
-              <FiEdit className="w-4 h-4" />
-            </button>
-
-            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
-              <FiPlay className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="flex items-center">
+        <ItemCardActions
+          status={status}
+          pendingPercentage={pendingPercentage}
+          onRetry={onRetry}
+        />
+      </div>
     </div>
   );
 }
