@@ -4,7 +4,7 @@ interface TagProps {
   size?: "sm" | "md" | "lg";
 }
 
-export default function Tag({
+export default function Badge({
   children,
   variant = "outline",
   size = "md",
