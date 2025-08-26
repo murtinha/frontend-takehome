@@ -11,18 +11,17 @@ datasource db {
 }
 
 model Item {
-  id                String     @id @default(cuid())
-  title             String
-  version           String
-  mcVersion         String
-  language          String
-  downloads         Int        @default(0)
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
-  image             String
-  status            ItemStatus @default(PENDING)
-  pendingPercentage Int        @default(0)
-  badges            String // JSON string of string[] array
+  id        String     @id @default(cuid())
+  title     String
+  version   String
+  mcVersion String
+  language  String
+  downloads Int        @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  image     String
+  status    ItemStatus @default(PENDING)
+  badges    String // JSON string of string[] array
 
   @@map("items")
 }

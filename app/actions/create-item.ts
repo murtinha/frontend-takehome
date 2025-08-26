@@ -18,7 +18,6 @@ export type CreateItemResult = {
     updatedAt: Date;
     image: string;
     status: string;
-    pendingPercentage: number;
     badges: string;
   };
   error?: string;
@@ -62,7 +61,6 @@ export async function createItem(
         downloads: 0,
         image: validatedData.image,
         status: "PENDING",
-        pendingPercentage: 0,
         badges: serializedBadges,
       },
     });

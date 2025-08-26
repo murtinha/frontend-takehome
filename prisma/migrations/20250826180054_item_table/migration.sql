@@ -10,6 +10,5 @@ CREATE TABLE "items" (
     "updatedAt" DATETIME NOT NULL,
     "image" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
-    "pendingPercentage" INTEGER NOT NULL DEFAULT 0,
     "badges" TEXT NOT NULL
 );
