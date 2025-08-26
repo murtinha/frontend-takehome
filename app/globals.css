@@ -120,9 +120,24 @@ code {
     --popover: #ffffff;
 
     --info: #c6ecff;
+    --info-foreground: #4A6FE3;
+    --info-secondary: #B7C4F1;
+    --info-tertiary: #EDF0FB;
+
     --success: #c2ffce;
+    --success-foreground: #3A9024;
+    --success-secondary: #B7DA92;
+    --success-tertiary: #E7F9D4;
+
     --failed: #ffdfdf;
+    --failed-secondary: #FCB5B5;
+    --failed-tertiary: #FFECEC;
+
     --warning: #eab308;
+    --warning-foreground: #EF7408;
+    --warning-secondary: #FFC19A;
+    --warning-tertiary: #FFEFE0;
+
 
     --accent: 259 60% 60%; /* hsl(259 60% 60%) */
     --accent-foreground: 40 10% 95%; /* hsl(40 10% 95%) */

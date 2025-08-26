@@ -65,10 +65,30 @@ module.exports = {
         input: "hsl(var(--input))",
         prompt: "var(--prompt)",
         ring: "var(--ring)",
-        info: "var(--info)",
-        success: "var(--success)",
-        failed: "var(--failed)",
-        warning: "var(--warning)",
+        info: {
+          DEFAULT: "var(--info)",
+          secondary: "var(--info-secondary)",
+          tertiary: "var(--info-tertiary)",
+          foreground: "var(--info-foreground)",
+        },
+        success: {
+          DEFAULT: "var(--success)",
+          secondary: "var(--success-secondary)",
+          tertiary: "var(--success-tertiary)",
+          foreground: "var(--success-foreground)",
+        },
+        failed: {
+          DEFAULT: "var(--failed)",
+          secondary: "var(--failed-secondary)",
+          tertiary: "var(--failed-tertiary)",
+          foreground: "var(--error-foreground)",
+        },
+        warning: {
+          DEFAULT: "var(--warning)",
+          secondary: "var(--warning-secondary)",
+          tertiary: "var(--warning-tertiary)",
+          foreground: "var(--warning-foreground)",
+        },
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",
@@ -190,10 +210,6 @@ module.exports = {
         card: "0 0 10px 0 rgba(0, 0, 0, 0.24)",
       },
     },
-  },
-  screens: {
-    mobile: { max: "1079px" },
-    desktop: "1080px",
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
