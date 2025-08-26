@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { getBadgeColor, ValidBadge } from "../../app/utils/badge";
 import { formatDate } from "../../app/utils/date";
-import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
 import ItemCardActions from "./item-card-actions";
 
@@ -25,7 +25,7 @@ export default function ItemCard({
   language: string;
   downloads: number;
   createdAt: Date | string;
-  badges: string[];
+  badges: ValidBadge[];
   image: string;
   status: "pending" | "success" | "error";
   pendingPercentage?: number;
