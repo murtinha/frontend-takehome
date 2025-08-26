@@ -136,6 +136,12 @@ module.exports = {
           bg: "#E1E8FF",
           text: "#5865F2",
         },
+        button: {
+          border: {
+            rainbow:
+              "bg-gradient-to-r from-red-500 via-pink-500 via-purple-500 via-blue-500 via-yellow-500 to-green-400",
+          },
+        },
       },
       borderRadius: {
         lg: "0.5rem",
@@ -208,6 +214,10 @@ module.exports = {
       },
       backgroundSize: {
         "200%": "200% 200%",
+      },
+      backgroundImage: {
+        "rainbow-gradient":
+          "linear-gradient(to right, #FF4646, #FF55C6, #4ED6FF, #FFC401, #59E418)",
       },
       typography: ({ theme }) => ({
         DEFAULT: {

@@ -16,6 +16,7 @@ export default function ItemListSection() {
           language="Java"
           downloads={300}
           createdAt="2025-03-05"
+          status="pending"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"
         />

@@ -4,6 +4,7 @@ import { HiOutlineSparkles } from "react-icons/hi2";
 import { formatDate } from "../../app/utils/date";
 import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
+import LoadingRainbowButton from "../ui/loading-rainbow-button";
 
 export default function ItemCard({
   title,
@@ -14,6 +15,8 @@ export default function ItemCard({
   createdAt,
   badges,
   image,
+  status,
+  pendingPercentage = 0,
 }: {
   title: string;
   version: string;
@@ -23,6 +26,8 @@ export default function ItemCard({
   createdAt: Date | string;
   badges: string[];
   image: string;
+  status?: "pending" | "success" | "error";
+  pendingPercentage?: number;
 }) {
   const badgesWithColors = getBadgeColor(badges);
 
@@ -35,7 +40,7 @@ export default function ItemCard({
         height={80}
         className="w-20 h-20"
       />
-      <div className="flex py-2 w-full flex-col">
+      <div className="flex py-2 w-full flex-col flex-1">
         <div className="flex items-baseline">
           <div className="text-2xl font-bold mr-4">{title}</div>
           <div className="flex gap-2">
@@ -70,6 +75,12 @@ export default function ItemCard({
           </div>
         </div>
       </div>
+
+      {status === "pending" && (
+        <div className="flex items-center ml-4">
+          <LoadingRainbowButton percentage={pendingPercentage} />
+        </div>
+      )}
     </div>
   );
 }
