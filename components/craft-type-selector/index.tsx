@@ -25,7 +25,7 @@ const craftOptions: CraftOption[] = [
   },
 ];
 
-export default function CraftSelector() {
+export default function CraftTypeSelector() {
   const [selectedOption, setSelectedOption] = useState("items");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
