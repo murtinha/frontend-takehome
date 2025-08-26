@@ -1,6 +1,6 @@
-interface TagProps {
+interface BadgeProps {
   children: React.ReactNode;
-  variant?: "success" | "warning" | "error" | "info" | "outline";
+  variant?: "green" | "blue" | "orange" | "pink" | "teal" | "red" | "outline";
   size?: "sm" | "md" | "lg";
 }
 
@@ -8,17 +8,18 @@ export default function Badge({
   children,
   variant = "outline",
   size = "md",
-}: TagProps) {
+}: BadgeProps) {
   const baseClasses = "font-medium inline-flex items-center justify-center";
 
   const variantClasses = {
-    success:
-      "bg-success-tertiary text-success-foreground border border-success-secondary",
-    warning:
-      "bg-warning-tertiary text-warning-foreground border border-warning-secondary",
-    error:
-      "bg-failed-tertiary text-failed-foreground border border-failed-secondary",
-    info: "bg-info-tertiary text-info-foreground border border-info-secondary",
+    green:
+      "bg-badge-green text-badge-green-foreground border border-badge-green-secondary",
+    blue: "bg-badge-blue text-badge-blue-foreground border border-badge-blue-secondary",
+    orange:
+      "bg-badge-orange text-badge-orange-foreground border border-badge-orange-secondary",
+    pink: "bg-badge-pink text-badge-pink-foreground border border-badge-pink-secondary",
+    teal: "bg-badge-teal text-badge-teal-foreground border border-badge-teal-secondary",
+    red: "bg-badge-red text-badge-red-foreground border border-badge-red-secondary",
     outline: "bg-transparent text-foreground border border-border",
   };
 

@@ -138,6 +138,30 @@ code {
     --warning-secondary: #FFC19A;
     --warning-tertiary: #FFEFE0;
 
+    --badge-green: #E7F9D4;
+    --badge-green-secondary: #B7DA92;
+    --badge-green-foreground: #3A9024;
+
+    --badge-blue: #EDF0FB;
+    --badge-blue-secondary: #B7C4F1;
+    --badge-blue-foreground: #4A6FE3;
+
+    --badge-orange: #FFEFE0;
+    --badge-orange-secondary: #FFC19A;
+    --badge-orange-foreground: #EF7408;
+
+    --badge-pink: #FEEDF6;
+    --badge-pink-secondary: #FFC5E3;
+    --badge-pink-foreground: #FF77BB;
+
+    --badge-teal: #E0F7F8;
+    --badge-teal-secondary: #7FDBEB;
+    --badge-teal-foreground: #4ACBD0;
+
+    --badge-red: #FFEBEB;
+    --badge-red-secondary: #FFCBCB;
+    --badge-red-foreground: #FF7070;
+
 
     --accent: 259 60% 60%; /* hsl(259 60% 60%) */
     --accent-foreground: 40 10% 95%; /* hsl(40 10% 95%) */
