@@ -53,35 +53,66 @@ export default function CraftSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 ml-2 rounded-md bg-white hover:border-gray-300 transition-all cursor-pointer min-w-[140px]"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          } else if (e.key === "ArrowDown" && !isOpen) {
+            e.preventDefault();
+            setIsOpen(true);
+          }
+        }}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+        aria-labelledby="craft-selector-label"
+        className="flex items-center gap-1 ml-2 rounded-md bg-white hover:border-gray-300 transition-all cursor-pointer min-w-[140px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
         <Image
           src={selectedCraft.icon}
-          alt={selectedCraft.name}
+          alt=""
           width={24}
           height={24}
           className="w-4 h-4 object-contain"
+          aria-hidden="true"
         />
-        <span className="font-medium">{selectedCraft.name}</span>
+        <span id="craft-selector-label" className="font-medium">
+          {selectedCraft.name}
+        </span>
         <IoChevronDown
           className={`w-4 h-4 transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
+          aria-hidden="true"
         />
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-          {craftOptions.map((option) => (
+        <div
+          role="menu"
+          aria-label="Craft options"
+          className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-10"
+        >
+          {craftOptions.map((option, index) => (
             <button
               key={option.id}
               onClick={() => {
                 setSelectedOption(option.id);
                 setIsOpen(false);
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  if (!option.comingSoon) {
+                    setSelectedOption(option.id);
+                    setIsOpen(false);
+                  }
+                }
+              }}
+              role="menuitem"
+              aria-selected={selectedOption === option.id}
               disabled={option.comingSoon}
               className={`
-                w-full flex items-center gap-3 px-4 py-3
+                w-full flex items-center gap-3 px-4 py-3 focus:outline-none focus:bg-gray-50
                 ${
                   selectedOption === option.id
                     ? "bg-primary/10 text-primary"
