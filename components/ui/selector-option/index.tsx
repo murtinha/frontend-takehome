@@ -25,16 +25,17 @@ export default function SelectorOption({
   const isFocused = focusedIndex === index;
 
   return (
-    <div
-      key={option.id}
+    <button
+      type="button"
+      disabled={option.comingSoon}
       role="option"
       aria-selected={value === option.id}
-      className={`flex items-center gap-2 px-4 py-3 cursor-pointer transition-color ${
+      className={`w-full text-left flex items-center gap-2 px-4 py-3 transition-colors ${
         isFocused ? "bg-primary text-white" : ""
       } ${
         option.comingSoon
           ? "opacity-50 cursor-not-allowed"
-          : "hover:bg-primary hover:text-white"
+          : "hover:bg-primary hover:text-white cursor-pointer"
       }`}
       onClick={() => handleOptionClick(option)}
       onMouseEnter={() => setFocusedIndex(index)}
@@ -50,6 +51,6 @@ export default function SelectorOption({
       <span className="font-medium">
         {option.name} {option.comingSoon && "(Coming Soon)"}
       </span>
-    </div>
+    </button>
   );
 }

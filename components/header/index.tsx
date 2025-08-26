@@ -20,17 +20,17 @@ export default function Header() {
             className={`text-xs desktop:text-base hover:text-primary ${
               selectedRoute === "/"
                 ? "underline decoration-dashed underline-offset-2"
-                : "text-gray-500"
+                : ""
             }`}
           >
             Craft
           </Link>
           <Link
             href="/explore"
-            className={`text-xs desktop:text-base hover:text-primary ${
+            className={`text-xs desktop:text-base hover:text-primary  ${
               selectedRoute === "/explore"
                 ? "underline decoration-dashed underline-offset-2"
-                : "text-gray-500"
+                : ""
             }`}
           >
             Explore

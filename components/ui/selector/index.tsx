@@ -8,10 +8,12 @@ interface SelectorProps {
   value: string;
   onChange: (value: string) => void;
   label?: string;
+  size?: "sm" | "lg";
 }
 
 export default function Selector({
   options,
+  size = "lg",
   value,
   onChange,
   label,
@@ -89,7 +91,7 @@ export default function Selector({
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleKeyDown}
-        className="flex items-center gap-1 ml-2 rounded-md bg-white transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="flex items-center gap-2 ml-2 rounded-md bg-white transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-labelledby={label}
@@ -98,24 +100,30 @@ export default function Selector({
           <img
             src={selectedOption.icon}
             alt=""
-            className="w-4 h-4 object-contain"
+            className="w-6 h-6 object-contain"
             aria-hidden="true"
           />
         )}
-        <span className="font-medium">{selectedOption?.name}</span>
-        <svg
-          className={`w-4 h-4 text-gray-400 transition-transform ${
-            isOpen ? "rotate-180" : ""
+        <span
+          className={`font-medium ${
+            size === "sm"
+              ? "text-[16px] text-[#09090980]"
+              : "text-[22px] text-[#090909]"
           }`}
+        >
+          {selectedOption?.name}
+        </span>
+        <svg
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+          width="9"
+          height="5"
+          viewBox="0 0 9 5"
           fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
+            d="M2.57601 0.200195H0.0605469V1.20347H1.3224V2.2002H2.57601V3.19692H3.83787V4.2002H5.09148V3.19692H6.34508V2.2002H7.60694V1.20347H8.86055V0.200195H6.34508L3.14044 0.200182L2.57601 0.200195Z"
+            fill={size === "sm" ? "#09090980" : "#090909"}
           />
         </svg>
       </button>

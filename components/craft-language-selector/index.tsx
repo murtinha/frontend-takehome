@@ -24,7 +24,11 @@ const languageOptions: Option[] = [
   },
 ];
 
-export default function CraftLanguageSelector() {
+export default function CraftLanguageSelector({
+  size = "lg",
+}: {
+  size?: "sm" | "lg";
+}) {
   const [selectedOption, setSelectedOption] = useState("java");
 
   return (
@@ -33,6 +37,7 @@ export default function CraftLanguageSelector() {
       value={selectedOption}
       onChange={setSelectedOption}
       label="craft-language-label"
+      size={size}
     />
   );
 }
