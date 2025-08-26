@@ -21,6 +21,7 @@ module.exports = {
         surface: {
           DEFAULT: "var(--surface)",
           secondary: "var(--surface-secondary)",
+          stroke: "var(--surface-stroke)",
         },
         create: "var(--create)",
         blog: "var(--blog)",

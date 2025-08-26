@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
+import { GrRefresh } from "react-icons/gr";
 import { HiOutlineSparkles } from "react-icons/hi2";
 import { formatDate } from "../../app/utils/date";
 import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
+import FailedIcon from "../ui/icons/failed-icon";
 import LoadingRainbowButton from "../ui/loading-rainbow-button";
 
 export default function ItemCard({
@@ -17,6 +19,7 @@ export default function ItemCard({
   image,
   status,
   pendingPercentage = 0,
+  onRetry,
 }: {
   title: string;
   version: string;
@@ -28,6 +31,7 @@ export default function ItemCard({
   image: string;
   status?: "pending" | "success" | "error";
   pendingPercentage?: number;
+  onRetry?: () => void;
 }) {
   const badgesWithColors = getBadgeColor(badges);
 
@@ -79,6 +83,28 @@ export default function ItemCard({
       {status === "pending" && (
         <div className="flex items-center ml-4">
           <LoadingRainbowButton percentage={pendingPercentage} />
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="flex items-center ml-4">
+          <div className="flex items-center gap-2">
+            <button
+              disabled
+              className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 text-sm font-medium"
+            >
+              <FailedIcon />
+              <span>Failed</span>
+            </button>
+
+            <button
+              onClick={onRetry}
+              className="flex items-center gap-2 px-3 py-2 border text-sm font-medium hover:bg-primary-hover transition-colors"
+            >
+              <span>Retry</span>
+              <GrRefresh className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       )}
     </div>
