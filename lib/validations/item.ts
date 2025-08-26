@@ -33,6 +33,7 @@ export const createItemSchema = z.object({
     .min(1, "Image URL is required")
     .url("Image must be a valid URL")
     .trim(),
+  type: z.enum(["items", "blocks"]).default("items"),
   badges: z
     .array(z.enum(VALID_BADGES as [ValidBadge, ...ValidBadge[]]))
     .min(1, "At least one badge is required")

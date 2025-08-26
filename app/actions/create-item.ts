@@ -49,7 +49,6 @@ export async function createItem(
     }
 
     const validatedData = validationResult.data;
-
     const serializedBadges = serializeBadges(validatedData.badges);
 
     const item = await prisma.item.create({

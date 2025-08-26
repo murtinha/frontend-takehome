@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCraftForm } from "../craft-box/craft-form-context";
 import Selector from "../ui/selector";
 import { Option } from "../ui/selector-option";
 
@@ -29,13 +29,18 @@ export default function CraftLanguageSelector({
 }: {
   size?: "sm" | "lg";
 }) {
-  const [selectedOption, setSelectedOption] = useState("java");
+  const { watch, setValue } = useCraftForm();
+  const selectedLanguage = watch("language");
+
+  const handleLanguageChange = (language: string) => {
+    setValue("language", language);
+  };
 
   return (
     <Selector
       options={languageOptions}
-      value={selectedOption}
-      onChange={setSelectedOption}
+      value={selectedLanguage}
+      onChange={handleLanguageChange}
       label="craft-language-label"
       size={size}
     />

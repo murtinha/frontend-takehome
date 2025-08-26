@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCraftForm } from "../craft-box/craft-form-context";
 import Selector from "../ui/selector";
 import { Option } from "../ui/selector-option";
 
@@ -19,13 +19,18 @@ const craftOptions: Option[] = [
 ];
 
 export default function CraftTypeSelector() {
-  const [selectedOption, setSelectedOption] = useState("items");
+  const { watch, setValue } = useCraftForm();
+  const selectedType = watch("type") || "items";
+
+  const handleTypeChange = (type: string) => {
+    setValue("type", type as "items" | "blocks");
+  };
 
   return (
     <Selector
       options={craftOptions}
-      value={selectedOption}
-      onChange={setSelectedOption}
+      value={selectedType}
+      onChange={handleTypeChange}
       label="craft-type-label"
     />
   );
