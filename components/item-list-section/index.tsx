@@ -33,6 +33,18 @@ export default function ItemListSection() {
           badges={["adventure", "vehicles", "gear", "rescue"]}
           image="/creativemode-mobile.webp"
         />
+        <Divider />
+        <ItemCard
+          title="CreativeMode"
+          version="1.0.0"
+          mcVersion="1.21.5"
+          language="Java"
+          downloads={300}
+          createdAt="2025-03-05"
+          status="success"
+          badges={["adventure", "vehicles", "gear", "rescue"]}
+          image="/creativemode-mobile.webp"
+        />
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
+import { FiEdit, FiPlay } from "react-icons/fi";
 import { GrRefresh } from "react-icons/gr";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { PiGitBranchThin } from "react-icons/pi";
 import { formatDate } from "../../app/utils/date";
 import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
@@ -91,7 +93,7 @@ export default function ItemCard({
           <div className="flex items-center gap-2">
             <button
               disabled
-              className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-200 text-sm font-medium"
             >
               <FailedIcon />
               <span>Failed</span>
@@ -99,10 +101,33 @@ export default function ItemCard({
 
             <button
               onClick={onRetry}
-              className="flex items-center gap-2 px-3 py-2 border text-sm font-medium hover:bg-primary-hover transition-colors"
+              className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover "
             >
               <span>Retry</span>
               <GrRefresh className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {status === "success" && (
+        <div className="flex items-center ml-4">
+          <div className="flex items-center gap-2">
+            <button className="flex items-center gap-2 px-4 py-3 bg-primary text-sm font-medium hover:bg-primary-hover">
+              <BsDownload className="w-4 h-4" />
+            </button>
+
+            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
+              <span>Remix</span>
+              <PiGitBranchThin className="w-4 h-4" />
+            </button>
+
+            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
+              <FiEdit className="w-4 h-4" />
+            </button>
+
+            <button className="flex items-center gap-2 px-4 py-3 border text-sm font-medium hover:bg-primary-hover ">
+              <FiPlay className="w-4 h-4" />
             </button>
           </div>
         </div>
