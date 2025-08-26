@@ -9,7 +9,16 @@ export default function ItemListSection() {
       </div>
 
       <div className="flex flex-col gap-2 mt-10">
-        <ItemCard />
+        <ItemCard
+          title="CreativeMode"
+          version="1.0.0"
+          mcVersion="1.21.5"
+          language="Java"
+          downloads={300}
+          createdAt="Mar 5, 2025"
+          badges={["adventure", "vehicles", "gear", "rescue"]}
+          image="/creativemode-mobile.webp"
+        />
       </div>
     </div>
   );

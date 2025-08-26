@@ -1,9 +1,30 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { getBadgeColor } from "../../app/utils/get-badge-color";
 import Badge from "../ui/badge";
 
-export default function ItemCard() {
+export default function ItemCard({
+  title,
+  version,
+  mcVersion,
+  language,
+  downloads,
+  createdAt,
+  badges,
+  image,
+}: {
+  title: string;
+  version: string;
+  mcVersion: string;
+  language: string;
+  downloads: number;
+  createdAt: string;
+  badges: string[];
+  image: string;
+}) {
+  const badgesWithColors = getBadgeColor(badges);
+
   return (
     <div className="flex w-full h-[80px] gap-2">
       <Image
@@ -15,16 +36,16 @@ export default function ItemCard() {
       />
       <div className="flex py-2 w-full flex-col">
         <div className="flex items-baseline">
-          <div className="text-2xl font-bold mr-4">CreativeMode</div>
+          <div className="text-2xl font-bold mr-4">{title}</div>
           <div className="flex gap-2">
             <Badge variant="outline" size="sm">
-              v1.0.0
+              v{version}
             </Badge>
             <Badge variant="outline" size="sm">
-              MC 1.21.5
+              MC {mcVersion}
             </Badge>
             <Badge variant="outline" size="sm">
-              Java
+              {language}
             </Badge>
           </div>
         </div>
@@ -32,26 +53,19 @@ export default function ItemCard() {
         <div className="flex items-center mt-2">
           <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
             <BsDownload className="w-4 h-4" />
-            <span className="text-sm">300</span>
+            <span className="text-sm">{downloads}</span>
             <span className="text-sm">downloads</span>
           </div>
           <div className="flex items-center gap-2 mr-4 text-surface-secondary font-medium">
             <HiOutlineSparkles className="w-4 h-4" />
-            <span className="text-sm">Created on Mar 5, 2025</span>
+            <span className="text-sm">Created on {createdAt}</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
-            <Badge variant="green" size="sm">
-              adventure
-            </Badge>
-            <Badge variant="orange" size="sm">
-              vehicles
-            </Badge>
-            <Badge variant="red" size="sm">
-              tactics
-            </Badge>
-            <Badge variant="blue" size="sm">
-              rescue
-            </Badge>
+            {badgesWithColors.map((badge, index) => (
+              <Badge key={index} variant={badge.color} size="sm">
+                {badge.text}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>
