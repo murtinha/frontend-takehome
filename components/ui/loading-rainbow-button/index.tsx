@@ -1,12 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Spinner from "../spinner";
 
-interface LoadingRainbowButtonProps {
-  percentage: number;
-}
+export default function LoadingRainbowButton() {
+  const [percentage, setPercentage] = useState(0);
 
-export default function LoadingRainbowButton({
-  percentage,
-}: LoadingRainbowButtonProps) {
+  useEffect(() => {
+    let currentPercentage = 0;
+    const targetPercentage = 99;
+    const duration = 5000;
+    const interval = 50;
+    const incrementPerStep =
+      (targetPercentage - currentPercentage) / (duration / interval);
+
+    const animationTimer = setInterval(() => {
+      currentPercentage = Math.min(
+        currentPercentage + incrementPerStep,
+        targetPercentage
+      );
+
+      setPercentage(Math.round(currentPercentage));
+
+      if (currentPercentage >= targetPercentage) {
+        clearInterval(animationTimer);
+      }
+    }, interval);
+
+    return () => {
+      clearInterval(animationTimer);
+    };
+  }, []);
+
   return (
     <div className="relative">
       <div className="relative p-[1px] bg-rainbow-gradient">

@@ -14,7 +14,6 @@ export type ItemWithBadges = {
   updatedAt: Date;
   image: string;
   status: "PENDING" | "SUCCESS" | "ERROR";
-  pendingPercentage: number;
   badges: ValidBadge[];
 };
 

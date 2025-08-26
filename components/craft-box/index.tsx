@@ -3,6 +3,7 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../app/actions/create-item";
+import { updateItemStatus } from "../../app/actions/update-item-status";
 import { deserializeBadges } from "../../app/utils/badge";
 import { useItemsStore } from "../../lib/stores/items-store";
 import { CreateItemSchema } from "../../lib/validations/item";
@@ -13,7 +14,7 @@ import { CraftFormContext } from "./craft-form-context";
 
 export default function CraftBox() {
   const { enqueueSnackbar } = useSnackbar();
-  const { addItem } = useItemsStore();
+  const { addItem, updateItem } = useItemsStore();
   const form = useForm<CreateItemSchema>({
     defaultValues: {
       title: "",
@@ -32,20 +33,45 @@ export default function CraftBox() {
       const result = await createItem(data);
 
       if (result.success && result.data) {
-        // Add the new item to the Zustand store
         const newItem = {
           ...result.data,
           badges: deserializeBadges(result.data.badges),
           status: result.data.status as "PENDING" | "SUCCESS" | "ERROR",
-          pendingPercentage: 0, // New items start at 0%
         };
         addItem(newItem);
 
         form.reset();
-        enqueueSnackbar("Item created successfully!", {
-          autoHideDuration: 3000,
-          variant: "success",
-        });
+        enqueueSnackbar(
+          "Item created successfully! Generation in progress...",
+          {
+            autoHideDuration: 3000,
+            variant: "success",
+          }
+        );
+
+        const itemId = result.data.id;
+        try {
+          const updateResult = await updateItemStatus(itemId);
+
+          if (updateResult.success && updateResult.data) {
+            enqueueSnackbar("Item generation completed successfully!", {
+              autoHideDuration: 3000,
+              variant: "success",
+            });
+          } else {
+            enqueueSnackbar("Item generation failed. Please try again.", {
+              autoHideDuration: 3000,
+              variant: "error",
+            });
+          }
+        } catch (error) {
+          console.error("Error updating item status:", error);
+
+          enqueueSnackbar("Item generation failed. Please try again.", {
+            autoHideDuration: 3000,
+            variant: "error",
+          });
+        }
       } else {
         if (result.fieldErrors) {
           Object.entries(result.fieldErrors).forEach(([field, errors]) => {

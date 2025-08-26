@@ -16,7 +16,6 @@ export default function ItemCard({
   badges,
   imageSrc,
   status,
-  pendingPercentage = 0,
   onRetry,
   onDownload,
   onRemix,
@@ -36,7 +35,6 @@ export default function ItemCard({
   badges: ValidBadge[];
   imageSrc: string;
   status: "pending" | "success" | "error";
-  pendingPercentage?: number;
   onRetry: () => void;
 }) {
   const badgesWithColors = getBadgeColor(badges);
@@ -93,7 +91,6 @@ export default function ItemCard({
       <div className="flex items-center">
         <ItemCardActions
           status={status}
-          pendingPercentage={pendingPercentage}
           onRetry={onRetry}
           onDownload={onDownload}
           onRemix={onRemix}

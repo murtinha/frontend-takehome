@@ -88,7 +88,6 @@ export default function ItemListSection() {
                 downloads={item.downloads}
                 createdAt={item.createdAt}
                 status={mapStatus(item.status)}
-                pendingPercentage={item.pendingPercentage}
                 badges={item.badges}
                 imageSrc={item.image}
                 onRetry={() => handleRetry(item.id)}

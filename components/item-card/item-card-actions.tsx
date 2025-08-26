@@ -7,7 +7,6 @@ import LoadingRainbowButton from "../ui/loading-rainbow-button";
 
 export default function ItemCardActions({
   status,
-  pendingPercentage,
   onRetry,
   onDownload,
   onRemix,
@@ -15,7 +14,6 @@ export default function ItemCardActions({
   onPlay,
 }: {
   status: "pending" | "error" | "success";
-  pendingPercentage: number;
   onRetry: () => void;
   onDownload: () => void;
   onRemix: () => void;
@@ -26,7 +24,7 @@ export default function ItemCardActions({
     <>
       {status === "pending" && (
         <div className="flex items-center ml-4 mobile:ml-0 mobile:mt-4 mobile:w-full mobile:justify-center">
-          <LoadingRainbowButton percentage={pendingPercentage} />
+          <LoadingRainbowButton />
         </div>
       )}
 
