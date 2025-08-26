@@ -10,7 +10,7 @@ export default function HomePage() {
       maxSnack={3}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "right",
+        horizontal: "left",
       }}
     >
       <div className="flex flex-col min-h-[calc(100vh-var(--header-height))]">
