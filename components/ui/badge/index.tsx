@@ -9,7 +9,8 @@ export default function Badge({
   variant = "outline",
   size = "md",
 }: BadgeProps) {
-  const baseClasses = "font-medium inline-flex items-center justify-center";
+  const baseClasses =
+    "font-medium inline-flex items-center justify-center whitespace-nowrap";
 
   const variantClasses = {
     green:

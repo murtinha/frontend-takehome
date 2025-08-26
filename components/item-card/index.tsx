@@ -88,7 +88,7 @@ export default function ItemCard({
         </div>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center mx-auto desktop:mx-0">
         <ItemCardActions
           status={status}
           onRetry={onRetry}

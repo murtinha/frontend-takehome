@@ -48,7 +48,7 @@ export default function ItemListSection() {
 
   if (loading) {
     return (
-      <div className="flex w-full px-10 flex-col">
+      <div className="flex w-full px-6 desktop:px-10 flex-col">
         <div className="text-2xl font-bold">Your Items</div>
         <div className="text-[16px]">
           Your Items will appear here, get started by crafting them above!
@@ -62,7 +62,7 @@ export default function ItemListSection() {
 
   if (error) {
     return (
-      <div className="flex w-full px-10 flex-col">
+      <div className="flex w-full px-6 desktop:px-10 flex-col">
         <div className="text-2xl font-bold">Your Items</div>
         <div className="text-[16px] text-red-500">{error}</div>
       </div>
@@ -70,7 +70,7 @@ export default function ItemListSection() {
   }
 
   return (
-    <div className="flex w-full px-10 flex-col mt-10">
+    <div className="flex w-full px-4 desktop:px-10 flex-col mt-10">
       <div className="text-2xl font-bold">Your Items</div>
       <div className="text-[16px]">
         Your Items will appear here, get started by crafting them above!

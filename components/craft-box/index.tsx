@@ -54,6 +54,9 @@ export default function CraftBox() {
           const updateResult = await updateItemStatus(itemId);
 
           if (updateResult.success && updateResult.data) {
+            // Update the item status in the local state
+            updateItem(itemId, { status: updateResult.data.status });
+
             enqueueSnackbar("Item generation completed successfully!", {
               autoHideDuration: 3000,
               variant: "success",
@@ -105,8 +108,8 @@ export default function CraftBox() {
 
   return (
     <CraftFormContext.Provider value={form}>
-      <div className="flex flex-col max-w-[760px] max-h-[286px] w-[80%] h-full bg-white p-6 shadow-card">
-        <div className="flex">
+      <div className="flex flex-col max-w-[760px] w-[80%] h-full bg-white p-6 shadow-card">
+        <div className="flex items-center gap-2 flex-wrap">
           <div className="flex flex-1">
             <span className="text-[22px] font-medium">Craft</span>{" "}
             <CraftTypeSelector />
