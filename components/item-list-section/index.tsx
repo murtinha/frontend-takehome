@@ -1,69 +1,130 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { getItems, ItemWithBadges } from "../../app/actions/get-items";
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
+import Spinner from "../ui/spinner";
 
 export default function ItemListSection() {
+  const [items, setItems] = useState<ItemWithBadges[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        setLoading(true);
+        const fetchedItems = await getItems();
+        setItems(fetchedItems);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching items:", err);
+        setError("Failed to load items");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  const handleRetry = (itemId: string) => {
+    console.log("Retry clicked for item:", itemId);
+    // TODO: Implement retry logic
+  };
+
+  const handleDownload = (itemId: string) => {
+    console.log("Download clicked for item:", itemId);
+    // TODO: Implement download logic
+  };
+
+  const handleRemix = (itemId: string) => {
+    console.log("Remix clicked for item:", itemId);
+    // TODO: Implement remix logic
+  };
+
+  const handleEdit = (itemId: string) => {
+    console.log("Edit clicked for item:", itemId);
+    // TODO: Implement edit logic
+  };
+
+  const handlePlay = (itemId: string) => {
+    console.log("Play clicked for item:", itemId);
+    // TODO: Implement play logic
+  };
+
+  const mapStatus = (status: string): "pending" | "success" | "error" => {
+    switch (status) {
+      case "PENDING":
+        return "pending";
+      case "SUCCESS":
+        return "success";
+      case "ERROR":
+        return "error";
+      default:
+        return "pending";
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex w-full px-10 flex-col">
+        <div className="text-2xl font-bold">Your Items</div>
+        <div className="text-[16px]">
+          Your Items will appear here, get started by crafting them above!
+        </div>
+        <div className="flex justify-center items-center mt-10">
+          <Spinner size="lg" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex w-full px-10 flex-col">
+        <div className="text-2xl font-bold">Your Items</div>
+        <div className="text-[16px] text-red-500">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex w-full px-10 flex-col">
       <div className="text-2xl font-bold">Your Items</div>
       <div className="text-[16px]">
-        Your Items will appear here, get started by crafting them above!
+        {items.length === 0
+          ? "Your Items will appear here, get started by crafting them above!"
+          : `You have ${items.length} item${items.length === 1 ? "" : "s"}`}
       </div>
 
-      <div className="flex flex-col gap-2 mt-10">
-        <ItemCard
-          title="CreativeMode"
-          version="1.0.0"
-          mcVersion="1.21.5"
-          language="Java"
-          downloads={300}
-          createdAt="2025-03-05"
-          status="pending"
-          pendingPercentage={45}
-          badges={["adventure", "vehicles", "gear", "rescue"]}
-          imageSrc="/creativemode-mobile.webp"
-          onRetry={() => console.log("Retry clicked")}
-          onDownload={() => console.log("Download clicked")}
-          onRemix={() => console.log("Remix clicked")}
-          onEdit={() => console.log("Edit clicked")}
-          onPlay={() => console.log("Play clicked")}
-        />
-        <Divider />
-        <ItemCard
-          title="CreativeMode"
-          version="1.0.0"
-          mcVersion="1.21.5"
-          language="Java"
-          downloads={300}
-          createdAt="2025-03-05"
-          status="error"
-          badges={["adventure", "vehicles", "gear", "rescue"]}
-          imageSrc="/creativemode-mobile.webp"
-          onRetry={() => console.log("Retry clicked")}
-          onDownload={() => console.log("Download clicked")}
-          onRemix={() => console.log("Remix clicked")}
-          onEdit={() => console.log("Edit clicked")}
-          onPlay={() => console.log("Play clicked")}
-        />
-        <Divider />
-        <ItemCard
-          title="CreativeMode"
-          version="1.0.0"
-          mcVersion="1.21.5"
-          language="Python"
-          downloads={300}
-          createdAt="2025-03-05"
-          status="success"
-          badges={["adventure", "vehicles", "gear", "rescue"]}
-          imageSrc="/creativemode-mobile.webp"
-          onRetry={() => console.log("Retry clicked")}
-          onDownload={() => console.log("Download clicked")}
-          onRemix={() => console.log("Remix clicked")}
-          onEdit={() => console.log("Edit clicked")}
-          onPlay={() => console.log("Play clicked")}
-        />
-      </div>
+      {items.length > 0 && (
+        <div className="flex flex-col gap-2 mt-10">
+          {items.map((item, index) => (
+            <div key={item.id}>
+              <ItemCard
+                title={item.title}
+                version={item.version}
+                mcVersion={item.mcVersion}
+                language={item.language}
+                downloads={item.downloads}
+                createdAt={item.createdAt}
+                status={mapStatus(item.status)}
+                pendingPercentage={item.pendingPercentage}
+                badges={item.badges}
+                imageSrc={item.image}
+                onRetry={() => handleRetry(item.id)}
+                onDownload={() => handleDownload(item.id)}
+                onRemix={() => handleRemix(item.id)}
+                onEdit={() => handleEdit(item.id)}
+                onPlay={() => handlePlay(item.id)}
+              />
+              {index < items.length - 1 && <Divider />}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
