@@ -24,6 +24,10 @@ export default function ItemListSection() {
           badges={["adventure", "vehicles", "gear", "rescue"]}
           imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
+          onDownload={() => console.log("Download clicked")}
+          onRemix={() => console.log("Remix clicked")}
+          onEdit={() => console.log("Edit clicked")}
+          onPlay={() => console.log("Play clicked")}
         />
         <Divider />
         <ItemCard
@@ -37,19 +41,27 @@ export default function ItemListSection() {
           badges={["adventure", "vehicles", "gear", "rescue"]}
           imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
+          onDownload={() => console.log("Download clicked")}
+          onRemix={() => console.log("Remix clicked")}
+          onEdit={() => console.log("Edit clicked")}
+          onPlay={() => console.log("Play clicked")}
         />
         <Divider />
         <ItemCard
           title="CreativeMode"
           version="1.0.0"
           mcVersion="1.21.5"
-          language="Java"
+          language="Python"
           downloads={300}
           createdAt="2025-03-05"
           status="success"
           badges={["adventure", "vehicles", "gear", "rescue"]}
           imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
+          onDownload={() => console.log("Download clicked")}
+          onRemix={() => console.log("Remix clicked")}
+          onEdit={() => console.log("Edit clicked")}
+          onPlay={() => console.log("Play clicked")}
         />
       </div>
     </div>

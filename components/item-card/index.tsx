@@ -18,11 +18,19 @@ export default function ItemCard({
   status,
   pendingPercentage = 0,
   onRetry,
+  onDownload,
+  onRemix,
+  onEdit,
+  onPlay,
 }: {
   title: string;
   version: string;
   mcVersion: string;
   language: string;
+  onDownload: () => void;
+  onRemix: () => void;
+  onEdit: () => void;
+  onPlay: () => void;
   downloads: number;
   createdAt: Date | string;
   badges: ValidBadge[];
@@ -87,6 +95,10 @@ export default function ItemCard({
           status={status}
           pendingPercentage={pendingPercentage}
           onRetry={onRetry}
+          onDownload={onDownload}
+          onRemix={onRemix}
+          onEdit={onEdit}
+          onPlay={onPlay}
         />
       </div>
     </div>
