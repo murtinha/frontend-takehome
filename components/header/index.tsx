@@ -10,7 +10,7 @@ export default function Header() {
   const selectedRoute = usePathname();
 
   return (
-    <div className="w-full h-[var(--header-height)] bg-create flex items-center py-6 px-4 desktop:px-10">
+    <div className="w-full h-[var(--header-height)] min-h-[var(--header-height)] bg-create flex items-center py-6 px-4 desktop:px-10">
       <HeaderLogo />
 
       <div className="flex-1">
@@ -38,7 +38,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 desktop:gap-4 ml-2">
+      <div className="flex items-center gap-2 ml-2">
         <button className="bg-discord-bg text-discord-text px-3 py-2 desktop:px-4 desktop:py-3 hover:opacity-90 transition-opacity flex items-center gap-1.5 desktop:gap-2 text-xs desktop:text-sm font-semibold">
           <FaDiscord className="w-3.5 h-3.5 desktop:w-5 desktop:h-5" />
           <span className="hidden desktop:inline">Join our community</span>
