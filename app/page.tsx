@@ -3,14 +3,12 @@ import ItemListSection from "../components/item-list-section";
 
 export default function Home() {
   return (
-    <div
-      className={`flex flex-col items-center justify-center h-[calc(100vh-var(--header-height))]`}
-    >
-      <div className="mb-10 w-full flex justify-center items-center bg-create h-full min-h-[440px]">
+    <div className="flex flex-col min-h-[calc(100vh-var(--header-height))] pt-[var(--header-height)] bg-create">
+      <div className="w-full flex justify-center items-center min-h-[440px] py-10 mobile:py-6">
         <CraftBox />
       </div>
 
-      <div className="w-full flex justify-center items-center mt-10 bg-white">
+      <div className="w-full flex justify-center items-center bg-white py-10 mobile:py-6">
         <ItemListSection />
       </div>
     </div>
