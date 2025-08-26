@@ -39,11 +39,11 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-2 desktop:gap-4 ml-2">
-        <button className="bg-discord-bg text-discord-text px-3 py-2 desktop:px-4 desktop:py-2 hover:opacity-90 transition-opacity flex items-center gap-1.5 desktop:gap-2 text-xs desktop:text-sm font-semibold">
-          <FaDiscord className="w-3.5 h-3.5 desktop:w-4 desktop:h-4" />
+        <button className="bg-discord-bg text-discord-text px-3 py-2 desktop:px-4 desktop:py-3 hover:opacity-90 transition-opacity flex items-center gap-1.5 desktop:gap-2 text-xs desktop:text-sm font-semibold">
+          <FaDiscord className="w-3.5 h-3.5 desktop:w-5 desktop:h-5" />
           <span className="hidden desktop:inline">Join our community</span>
         </button>
-        <div className="w-8 h-8 desktop:w-9 desktop:h-9 overflow-hidden border border-black">
+        <div className="w-8 h-8 desktop:w-10 desktop:h-10 overflow-hidden border border-black">
           <Image
             src="https://avatar.iran.liara.run/public/47"
             alt="User Avatar"
@@ -52,7 +52,7 @@ export default function Header() {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="flex items-center justify-center w-5 h-5 desktop:w-6 desktop:h-6 rounded-full border-2 border-green-500 bg-white text-xs font-bold">
+        <div className="flex items-center justify-center w-5 h-5 desktop:w-8 desktop:h-8 rounded-full border-2 border-green-500 bg-white text-xs font-bold">
           1
         </div>
       </div>

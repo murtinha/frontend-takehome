@@ -122,7 +122,7 @@ export default function Selector({
 
       {isOpen && (
         <div
-          className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 min-w-[140px]"
+          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 min-w-[140px] max-w-[90vw]"
           role="listbox"
           aria-labelledby={label}
         >
