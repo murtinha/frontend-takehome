@@ -3,7 +3,7 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../app/actions/create-item";
-import { updateItemStatus } from "../../app/actions/update-item-status";
+import { generateItem } from "../../app/actions/generate-item";
 import { deserializeBadges } from "../../app/utils/badge";
 import { useItemsStore } from "../stores/items-store";
 import { CreateItemSchema } from "../validations/item";
@@ -28,7 +28,6 @@ export function useCraftForm() {
 
   const onSubmit = async (data: CreateItemSchema) => {
     try {
-      // Add randomizer to ensure different images
       const uniqueImageUrl = `${data.image}?r=${Math.random()}`;
       const dataWithUniqueImage = { ...data, image: uniqueImageUrl };
 
@@ -53,10 +52,9 @@ export function useCraftForm() {
 
         const itemId = result.data.id;
         try {
-          const updateResult = await updateItemStatus(itemId);
+          const updateResult = await generateItem(itemId);
 
           if (updateResult.success && updateResult.data) {
-            // Update the item status in the local state
             updateItem(itemId, { status: updateResult.data.status });
 
             enqueueSnackbar("Item generation completed successfully!", {
@@ -64,12 +62,14 @@ export function useCraftForm() {
               variant: "success",
             });
           } else {
+            updateItem(itemId, { status: "ERROR" });
             enqueueSnackbar("Item generation failed. Please try again.", {
               autoHideDuration: 3000,
               variant: "error",
             });
           }
         } catch (error) {
+          updateItem(itemId, { status: "ERROR" });
           console.error("Error updating item status:", error);
 
           enqueueSnackbar("Item generation failed. Please try again.", {

@@ -11,7 +11,7 @@ export type UpdateItemStatusResult = {
   error?: string;
 };
 
-export async function updateItemStatus(
+export async function generateItem(
   itemId: string
 ): Promise<UpdateItemStatusResult> {
   try {
