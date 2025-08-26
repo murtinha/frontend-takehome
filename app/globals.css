@@ -142,6 +142,9 @@ code {
     /* Blog font family options: Change the value of --blog-font-family below to try different fonts. */
     --blog-font-family: "Inter";
 
+    /* Header height variable */
+    --header-height: 90px;
+
     /* Tailwind palette variables for Aurora background */
     --blue-500: #3b82f6;
     --indigo-300: #a5b4fc;

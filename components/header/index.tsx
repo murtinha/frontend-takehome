@@ -10,7 +10,7 @@ export default function Header() {
   const selectedRoute = usePathname();
 
   return (
-    <div className="w-full h-[90px] bg-create flex items-center py-6 px-4 desktop:px-10">
+    <div className="w-full h-[var(--header-height)] bg-create flex items-center py-6 px-4 desktop:px-10">
       <HeaderLogo />
 
       <div className="flex-1">
