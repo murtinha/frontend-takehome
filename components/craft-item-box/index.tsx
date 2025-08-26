@@ -1,10 +1,14 @@
+import CraftLanguageSelector from "../craft-language-selector";
 import CraftTypeSelector from "../craft-type-selector";
 
 export default function CraftItemBox() {
   return (
-    <div className="w-[760px] h-[286px] bg-white p-6">
+    <div className="max-w-[760px] max-h-[286px] w-full h-full bg-white p-6">
       <div className="flex">
-        <span>Craft</span> <CraftTypeSelector />
+        <div className="flex flex-1">
+          <span>Craft</span> <CraftTypeSelector />
+        </div>
+        <CraftLanguageSelector />
       </div>
     </div>
   );
