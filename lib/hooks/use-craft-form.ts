@@ -3,14 +3,15 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../app/actions/create-item";
-import { generateItem } from "../../app/actions/generate-item";
 import { deserializeBadges } from "../../app/utils/badge";
 import { useItemsStore } from "../stores/items-store";
 import { CreateItemSchema } from "../validations/item";
+import { useItemGeneration } from "./use-item-generation";
 
 export function useCraftForm() {
   const { enqueueSnackbar } = useSnackbar();
-  const { addItem, updateItem } = useItemsStore();
+  const { addItem } = useItemsStore();
+  const { generateItemWithStatus } = useItemGeneration();
 
   const form = useForm<CreateItemSchema>({
     defaultValues: {
@@ -51,32 +52,7 @@ export function useCraftForm() {
         );
 
         const itemId = result.data.id;
-        try {
-          const updateResult = await generateItem(itemId);
-
-          if (updateResult.success && updateResult.data) {
-            updateItem(itemId, { status: updateResult.data.status });
-
-            enqueueSnackbar("Item generation completed successfully!", {
-              autoHideDuration: 3000,
-              variant: "success",
-            });
-          } else {
-            updateItem(itemId, { status: "ERROR" });
-            enqueueSnackbar("Item generation failed. Please try again.", {
-              autoHideDuration: 3000,
-              variant: "error",
-            });
-          }
-        } catch (error) {
-          updateItem(itemId, { status: "ERROR" });
-          console.error("Error updating item status:", error);
-
-          enqueueSnackbar("Item generation failed. Please try again.", {
-            autoHideDuration: 3000,
-            variant: "error",
-          });
-        }
+        await generateItemWithStatus(itemId);
       } else {
         if (result.fieldErrors) {
           Object.entries(result.fieldErrors).forEach(([field, errors]) => {

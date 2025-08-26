@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect } from "react";
+import { useItemGeneration } from "../../lib/hooks/use-item-generation";
 import { useItemsStore } from "../../lib/stores/items-store";
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
 import Spinner from "../ui/spinner";
 
 export default function ItemListSection() {
-  const { items, loading, error, fetchItems } = useItemsStore();
+  const { items, loading, error, fetchItems, updateItem } = useItemsStore();
+  const { generateItemWithStatus } = useItemGeneration();
 
   useEffect(() => {
     fetchItems();
   }, [fetchItems]);
 
-  const handleRetry = (itemId: string) => {
-    console.log("Retry clicked for item:", itemId);
+  const handleRetry = async (itemId: string) => {
+    updateItem(itemId, { status: "PENDING" });
+    await generateItemWithStatus(itemId);
   };
 
   const handleDownload = (itemId: string) => {

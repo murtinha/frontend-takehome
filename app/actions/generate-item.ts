@@ -15,15 +15,13 @@ export async function generateItem(
   itemId: string
 ): Promise<UpdateItemStatusResult> {
   try {
-    // Wait 5 seconds to simulate item generation
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    // 50% chance of throwing an error to simulate generation failure
-    if (Math.random() < 0.5) {
+    const randomValue = Math.random();
+    if (randomValue < 0.5) {
       throw new Error("Item generation failed due to server error");
     }
 
-    // Update the item status to SUCCESS
     const updatedItem = await prisma.item.update({
       where: { id: itemId },
       data: {
@@ -45,7 +43,6 @@ export async function generateItem(
   } catch (error) {
     console.error("Error updating item status:", error);
 
-    // Update the item status to ERROR in the database
     try {
       await prisma.item.update({
         where: { id: itemId },
