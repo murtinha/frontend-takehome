@@ -22,7 +22,7 @@ export default function ItemListSection() {
           status="pending"
           pendingPercentage={45}
           badges={["adventure", "vehicles", "gear", "rescue"]}
-          image="/creativemode-mobile.webp"
+          imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
         />
         <Divider />
@@ -35,7 +35,7 @@ export default function ItemListSection() {
           createdAt="2025-03-05"
           status="error"
           badges={["adventure", "vehicles", "gear", "rescue"]}
-          image="/creativemode-mobile.webp"
+          imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
         />
         <Divider />
@@ -48,7 +48,7 @@ export default function ItemListSection() {
           createdAt="2025-03-05"
           status="success"
           badges={["adventure", "vehicles", "gear", "rescue"]}
-          image="/creativemode-mobile.webp"
+          imageSrc="/creativemode-mobile.webp"
           onRetry={() => console.log("Retry clicked")}
         />
       </div>

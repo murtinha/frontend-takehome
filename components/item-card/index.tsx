@@ -14,7 +14,7 @@ export default function ItemCard({
   downloads,
   createdAt,
   badges,
-  image,
+  imageSrc,
   status,
   pendingPercentage = 0,
   onRetry,
@@ -26,7 +26,7 @@ export default function ItemCard({
   downloads: number;
   createdAt: Date | string;
   badges: ValidBadge[];
-  image: string;
+  imageSrc: string;
   status: "pending" | "success" | "error";
   pendingPercentage?: number;
   onRetry: () => void;
@@ -36,7 +36,7 @@ export default function ItemCard({
   return (
     <div className="flex w-full min-h-[80px] gap-2 flex-wrap">
       <Image
-        src="/creativemode-mobile.webp"
+        src={imageSrc}
         alt="CreativeMode"
         width={80}
         height={80}
