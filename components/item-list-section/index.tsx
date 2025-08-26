@@ -4,7 +4,7 @@ export default function ItemListSection() {
   return (
     <div className="flex w-full px-10 flex-col mb-10">
       <div className="text-2xl font-bold">Your Items</div>
-      <div className="text-sm">
+      <div className="text-[16px]">
         Your Items will appear here, get started by crafting them above!
       </div>
 

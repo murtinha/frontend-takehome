@@ -18,7 +18,10 @@ module.exports = {
           DEFAULT: "var(--background)",
           secondary: "var(--background-secondary)",
         },
-        surface: "var(--surface)",
+        surface: {
+          DEFAULT: "var(--surface)",
+          secondary: "var(--surface-secondary)",
+        },
         create: "var(--create)",
         blog: "var(--blog)",
         foreground: "var(--foreground)",
