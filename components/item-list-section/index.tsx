@@ -70,12 +70,10 @@ export default function ItemListSection() {
   }
 
   return (
-    <div className="flex w-full px-10 flex-col">
+    <div className="flex w-full px-10 flex-col mt-10">
       <div className="text-2xl font-bold">Your Items</div>
       <div className="text-[16px]">
-        {items.length === 0
-          ? "Your Items will appear here, get started by crafting them above!"
-          : `You have ${items.length} item${items.length === 1 ? "" : "s"}`}
+        Your Items will appear here, get started by crafting them above!
       </div>
 
       {items.length > 0 && (
