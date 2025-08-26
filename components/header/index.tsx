@@ -17,7 +17,7 @@ export default function Header() {
         <div className="flex items-center gap-3 desktop:gap-4 ml-4 desktop:ml-10 font-semibold">
           <Link
             href="/"
-            className={`text-xs desktop:text-base transition-colors hover:text-primary ${
+            className={`text-xs desktop:text-base hover:text-primary ${
               selectedRoute === "/"
                 ? "underline decoration-dashed underline-offset-2"
                 : "text-gray-500"
@@ -27,7 +27,7 @@ export default function Header() {
           </Link>
           <Link
             href="/explore"
-            className={`text-xs desktop:text-base transition-colors hover:text-primary ${
+            className={`text-xs desktop:text-base hover:text-primary ${
               selectedRoute === "/explore"
                 ? "underline decoration-dashed underline-offset-2"
                 : "text-gray-500"

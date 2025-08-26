@@ -91,7 +91,6 @@ module.exports = {
         "color-3": "hsl(var(--color-3))",
         "color-4": "hsl(var(--color-4))",
         "color-5": "hsl(var(--color-5))",
-        // Discord-like colors for login button
         discord: {
           bg: "#E1E8FF",
           text: "#5865F2",
