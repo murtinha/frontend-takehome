@@ -186,6 +186,9 @@ module.exports = {
       fontFamily: {
         mono: ['"IBM Plex Mono"', "monospace"],
       },
+      boxShadow: {
+        card: "0 0 10px 0 rgba(0, 0, 0, 0.24)",
+      },
     },
   },
   screens: {
