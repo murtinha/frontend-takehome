@@ -62,7 +62,7 @@ export default function ItemCardMobile({
       </div>
 
       {/* Badges */}
-      <div className="flex flex-wrap gap-1">
+      <div className="flex flex-wrap gap-1 mx-auto">
         {badgesWithColors.map((badge, index) => (
           <Badge key={index} variant={badge.color} size="sm">
             {badge.text}
