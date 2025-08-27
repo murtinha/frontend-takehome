@@ -43,7 +43,7 @@ pnpm install
 
 ### 3. Set up environment variables
 
-Create a `.env.local` file in the root directory:
+Create a `.env` file in the root directory:
 
 ```bash
 # Database
@@ -62,9 +62,6 @@ npx prisma generate
 
 # Run database migrations
 npx prisma migrate dev
-
-# (Optional) Seed the database with sample data
-npx prisma db seed
 ```
 
 ### 5. Start the development server
