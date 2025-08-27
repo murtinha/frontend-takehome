@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import SelectorOption, { Option } from "../selector-option";
 
@@ -97,9 +98,11 @@ export default function Selector({
         aria-labelledby={label}
       >
         {selectedOption?.icon && (
-          <img
+          <Image
             src={selectedOption.icon}
             alt=""
+            width={24}
+            height={24}
             className="w-6 h-6 object-contain"
             aria-hidden="true"
           />

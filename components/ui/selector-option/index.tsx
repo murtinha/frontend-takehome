@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export interface Option {
   id: string;
   name: string;
@@ -41,8 +43,10 @@ export default function SelectorOption({
       onMouseEnter={() => setFocusedIndex(index)}
     >
       {option.icon && (
-        <img
+        <Image
           src={option.icon}
+          width={16}
+          height={16}
           alt=""
           className="w-4 h-4 object-contain"
           aria-hidden="true"

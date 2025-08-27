@@ -9,7 +9,7 @@ export function formatDate(date: Date | string): string {
   try {
     const dateObj = typeof date === "string" ? new Date(date) : date;
     return format(dateObj, "MMM d, yyyy");
-  } catch (error) {
+  } catch {
     return "Unknown date";
   }
 }

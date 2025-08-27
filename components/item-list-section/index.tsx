@@ -101,7 +101,7 @@ export default function ItemListSection() {
               <Spinner size="lg" />
             </div>
           ) : (
-            items.map((item, index) => (
+            items.map((item) => (
               <div key={item.id}>
                 <ItemCard
                   title={item.title}
