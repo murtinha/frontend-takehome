@@ -2,7 +2,7 @@
 
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
-import { createItem } from "../../app/actions/create-item";
+import { createItem } from "../../actions/create-item";
 import { deserializeBadges, VALID_BADGES } from "../../app/utils/badge";
 import { useItemsStore } from "../stores/items-store";
 import { CreateItemSchema } from "../validations/item";

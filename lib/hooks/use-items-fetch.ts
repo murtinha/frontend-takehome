@@ -1,6 +1,6 @@
 "use client";
 
-import { getItems } from "../../app/actions/get-items";
+import { getItems } from "../../actions/get-items";
 import { useItemsStore } from "../stores/items-store";
 
 export function useItemsFetch() {

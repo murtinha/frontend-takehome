@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ItemWithBadges } from "../../app/actions/get-items";
+import { ItemWithBadges } from "../../actions/get-items";
 
 interface ItemsState {
   items: ItemWithBadges[];

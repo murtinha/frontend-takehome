@@ -1,7 +1,7 @@
 "use client";
 
 import { useSnackbar } from "notistack";
-import { generateItem } from "../../app/actions/generate-item";
+import { generateItem } from "../../actions/generate-item";
 import { useItemsStore } from "../stores/items-store";
 
 export function useItemGeneration() {
