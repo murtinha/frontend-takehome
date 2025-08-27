@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { BsDownload } from "react-icons/bs";
 import { HiOutlineSparkles } from "react-icons/hi2";
-import { formatDate } from "../../app/utils/date";
+import { formatDate } from "../../utils/date";
 import Badge from "../ui/badge";
 import ItemCardActions from "./item-card-actions";
 import { ItemCardWithBadgesProps } from "./item-card.types";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { VALID_BADGES, ValidBadge } from "../../app/utils/badge";
+import { VALID_BADGES, ValidBadge } from "../../utils/badge";
 
 export const createItemSchema = z.object({
   title: z

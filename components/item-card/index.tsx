@@ -1,5 +1,5 @@
-import { getBadgeColor, ValidBadge } from "../../app/utils/badge";
 import { useMediaQuery } from "../../lib/hooks/use-media-query";
+import { getBadgeColor, ValidBadge } from "../../utils/badge";
 import ItemCardDesktop from "./item-card-desktop";
 import ItemCardMobile from "./item-card-mobile";
 import { ItemCardProps } from "./item-card.types";

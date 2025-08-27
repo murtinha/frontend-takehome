@@ -1,7 +1,7 @@
 "use server";
 
-import { deserializeBadges, ValidBadge } from "../app/utils/badge";
 import { prisma } from "../lib/prisma";
+import { deserializeBadges, ValidBadge } from "../utils/badge";
 
 export type ItemWithBadges = {
   id: string;

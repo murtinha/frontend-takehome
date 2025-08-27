@@ -1,4 +1,4 @@
-import { BadgeColor } from "../../app/utils/badge";
+import { BadgeColor } from "../../utils/badge";
 
 export interface ItemCardProps {
   title: string;

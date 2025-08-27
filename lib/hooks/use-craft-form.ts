@@ -3,7 +3,7 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../actions/create-item";
-import { deserializeBadges, VALID_BADGES } from "../../app/utils/badge";
+import { deserializeBadges, VALID_BADGES } from "../../utils/badge";
 import { useItemsStore } from "../stores/items-store";
 import { CreateItemSchema } from "../validations/item";
 import { useItemGeneration } from "./use-item-generation";
