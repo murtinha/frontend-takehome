@@ -23,14 +23,14 @@ export default function ItemCardActions({
   return (
     <>
       {status === "pending" && (
-        <div className="flex items-center ml-4 mobile:ml-0 mobile:mt-4 mobile:w-full mobile:justify-center">
+        <div className="flex items-center mt-4 desktop:mt-0 w-full justify-center">
           <LoadingRainbowButton />
         </div>
       )}
 
       {status === "error" && (
-        <div className="flex items-center ml-4 mobile:ml-0 mobile:mt-4 mobile:w-full mobile:justify-center">
-          <div className="flex items-center gap-2 mobile:flex-wrap mobile:justify-center">
+        <div className="flex items-center mt-4 desktop:mt-0 w-full justify-center">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
             <button
               disabled
               className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-200 text-sm font-medium"
@@ -51,8 +51,8 @@ export default function ItemCardActions({
       )}
 
       {status === "success" && (
-        <div className="flex items-center ml-4 mobile:ml-0 mobile:mt-4 mobile:w-full mobile:justify-center">
-          <div className="flex items-center gap-2 mobile:flex-wrap mobile:justify-center">
+        <div className="flex items-center mt-4 desktop:mt-0 w-full justify-center">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
             <button
               onClick={onDownload}
               className="flex items-center gap-2 px-4 py-3 bg-primary text-sm font-medium hover:bg-primary-hover"
