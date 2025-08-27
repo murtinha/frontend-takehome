@@ -21,10 +21,7 @@ export function useCraftForm() {
       language: "java",
       image: "https://random-image-pepebigotes.vercel.app/api/random-image",
       type: "items",
-      badges: Array.from(
-        { length: 4 },
-        () => VALID_BADGES[Math.floor(Math.random() * VALID_BADGES.length)]
-      ),
+      badges: [],
     },
   });
 
@@ -33,7 +30,15 @@ export function useCraftForm() {
   const onSubmit = async (data: CreateItemSchema) => {
     try {
       const uniqueImageUrl = `${data.image}?r=${Math.random()}`;
-      const dataWithUniqueImage = { ...data, image: uniqueImageUrl };
+
+      const shuffledBadges = [...VALID_BADGES].sort(() => Math.random() - 0.5);
+      const randomBadges = shuffledBadges.slice(0, 4);
+
+      const dataWithUniqueImage = {
+        ...data,
+        image: uniqueImageUrl,
+        badges: data.badges.length > 0 ? data.badges : randomBadges,
+      };
 
       const result = await createItem(dataWithUniqueImage);
 
