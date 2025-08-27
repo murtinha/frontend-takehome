@@ -28,11 +28,11 @@ export default function Pagination({ listRef }: PaginationProps) {
 
   return (
     <div className="mt-2 desktop:mt-7 flex flex-col desktop:flex-row gap-y-2 mx-auto desktop:mx-0">
-      <div className="flex items-center flex-1">
+      <div className="flex items-center flex-1 text-sm">
         {totalCount} total mods number
       </div>
-      <div className="flex items-center gap-2">
-        <div>
+      <div className="flex items-center gap-4 desktop:gap-8">
+        <div className="text-sm font-medium">
           Page {page} of {totalPages}
         </div>
         <div className="flex items-center gap-2">
