@@ -15,6 +15,7 @@ interface ItemsState {
   fetchItems: (take?: number, skip?: number) => Promise<void>;
 }
 
+const PAGE_SIZE = 5;
 export const useItemsStore = create<ItemsState>((set, get) => ({
   items: [],
   totalCount: 0,
@@ -23,9 +24,8 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
   page: 1,
   setPage: (page) => {
     set({ page });
-    const pageSize = 5; // Fixed page size
-    const skip = (page - 1) * pageSize;
-    get().fetchItems(pageSize, skip);
+    const skip = (page - 1) * PAGE_SIZE;
+    get().fetchItems(PAGE_SIZE, skip);
   },
   addItem: (item) =>
     set((state) => ({
