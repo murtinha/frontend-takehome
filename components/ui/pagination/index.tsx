@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useRef } from "react";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+import { useItemsFetch } from "../../../lib/hooks/use-items-fetch";
 import { useItemsStore } from "../../../lib/stores/items-store";
 
 interface PaginationProps {
@@ -8,6 +9,7 @@ interface PaginationProps {
 
 export default function Pagination({ listRef }: PaginationProps) {
   const { totalCount, page, setPage, loading } = useItemsStore();
+  const { fetchItems } = useItemsFetch();
   const previousPageRef = useRef(page);
 
   const totalPages = Math.ceil(totalCount / 5);
@@ -24,6 +26,8 @@ export default function Pagination({ listRef }: PaginationProps) {
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
+    const skip = (newPage - 1) * 5;
+    fetchItems(5, skip);
   };
 
   return (

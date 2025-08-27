@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useItemGeneration } from "../../lib/hooks/use-item-generation";
+import { useItemsFetch } from "../../lib/hooks/use-items-fetch";
 import { useItemsStore } from "../../lib/stores/items-store";
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
@@ -9,14 +10,15 @@ import Pagination from "../ui/pagination";
 import Spinner from "../ui/spinner";
 
 export default function ItemListSection() {
-  const { items, loading, error, fetchItems, updateItem } = useItemsStore();
+  const { items, loading, error, updateItem } = useItemsStore();
   const { generateItemWithStatus } = useItemGeneration();
+  const { fetchItems } = useItemsFetch();
   const listRef = useRef<HTMLDivElement>(null);
   const heightRef = useRef<number>(0);
 
   useEffect(() => {
     fetchItems(5, 0);
-  }, [fetchItems]);
+  }, []);
 
   useEffect(() => {
     if (!loading && listRef.current) {
@@ -101,7 +103,7 @@ export default function ItemListSection() {
               <Spinner size="lg" />
             </div>
           ) : (
-            items.map((item) => (
+            items.map((item, index) => (
               <div key={item.id}>
                 <ItemCard
                   title={item.title}
