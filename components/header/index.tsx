@@ -45,7 +45,7 @@ export default function Header() {
         </button>
         <div className="w-8 h-8 desktop:w-10 desktop:h-10 overflow-hidden border border-black">
           <Image
-            src="https://avatar.iran.liara.run/public/47"
+            src="/avatar.svg"
             alt="User Avatar"
             width={32}
             height={32}
