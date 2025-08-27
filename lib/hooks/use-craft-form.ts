@@ -3,7 +3,7 @@
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { createItem } from "../../app/actions/create-item";
-import { deserializeBadges } from "../../app/utils/badge";
+import { deserializeBadges, VALID_BADGES } from "../../app/utils/badge";
 import { useItemsStore } from "../stores/items-store";
 import { CreateItemSchema } from "../validations/item";
 import { useItemGeneration } from "./use-item-generation";
@@ -21,7 +21,10 @@ export function useCraftForm() {
       language: "java",
       image: "https://random-image-pepebigotes.vercel.app/api/random-image",
       type: "items",
-      badges: ["adventure"],
+      badges: Array.from(
+        { length: 4 },
+        () => VALID_BADGES[Math.floor(Math.random() * VALID_BADGES.length)]
+      ),
     },
   });
 
