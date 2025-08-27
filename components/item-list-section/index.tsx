@@ -5,6 +5,7 @@ import { useItemGeneration } from "../../lib/hooks/use-item-generation";
 import { useItemsStore } from "../../lib/stores/items-store";
 import ItemCard from "../item-card";
 import Divider from "../ui/divider";
+import Pagination from "../ui/pagination";
 import Spinner from "../ui/spinner";
 
 export default function ItemListSection() {
@@ -12,7 +13,7 @@ export default function ItemListSection() {
   const { generateItemWithStatus } = useItemGeneration();
 
   useEffect(() => {
-    fetchItems();
+    fetchItems(5, 0);
   }, [fetchItems]);
 
   const handleRetry = async (itemId: string) => {
@@ -72,6 +73,8 @@ export default function ItemListSection() {
     );
   }
 
+  const hasItems = items.length > 0;
+
   return (
     <div className="flex w-full px-4 desktop:px-10 flex-col mt-10">
       <div className="text-2xl font-bold">Your Items</div>
@@ -79,7 +82,7 @@ export default function ItemListSection() {
         Your Items will appear here, get started by crafting them above!
       </div>
 
-      {items.length > 0 && (
+      {hasItems && (
         <div className="flex flex-col gap-2 mt-10">
           {items.map((item, index) => (
             <div key={item.id}>
@@ -99,11 +102,13 @@ export default function ItemListSection() {
                 onEdit={() => handleEdit(item.id)}
                 onPlay={() => handlePlay(item.id)}
               />
-              {index < items.length - 1 && <Divider />}
+              <Divider />
             </div>
           ))}
         </div>
       )}
+
+      {hasItems && <Pagination />}
     </div>
   );
 }

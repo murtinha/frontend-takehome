@@ -17,22 +17,40 @@ export type ItemWithBadges = {
   badges: ValidBadge[];
 };
 
-export async function getItems(): Promise<ItemWithBadges[]> {
+export async function getItems({
+  take = 5,
+  skip = 0,
+}: {
+  take?: number;
+  skip?: number;
+}): Promise<{
+  items: ItemWithBadges[];
+  totalCount: number;
+}> {
   try {
+    const totalCount = await prisma.item.count();
     const items = await prisma.item.findMany({
+      take,
+      skip,
       orderBy: {
         createdAt: "desc",
       },
     });
 
     // Deserialize badges for each item
-    return items.map((item) => ({
-      ...item,
-      status: item.status as "PENDING" | "SUCCESS" | "ERROR",
-      badges: deserializeBadges(item.badges),
-    }));
+    return {
+      items: items.map((item) => ({
+        ...item,
+        status: item.status as "PENDING" | "SUCCESS" | "ERROR",
+        badges: deserializeBadges(item.badges),
+      })),
+      totalCount,
+    };
   } catch (error) {
     console.error("Error fetching items:", error);
-    return [];
+    return {
+      items: [],
+      totalCount: 0,
+    };
   }
 }

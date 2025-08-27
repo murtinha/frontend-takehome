@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ItemWithBadges } from "../../app/actions/get-items";
+import { getItems, ItemWithBadges } from "../../app/actions/get-items";
 
 interface ItemsState {
   items: ItemWithBadges[];
@@ -9,14 +9,24 @@ interface ItemsState {
   updateItem: (id: string, updates: Partial<ItemWithBadges>) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
-  fetchItems: () => Promise<void>;
+  totalCount: number;
+  page: number;
+  setPage: (page: number) => void;
+  fetchItems: (take?: number, skip?: number) => Promise<void>;
 }
 
 export const useItemsStore = create<ItemsState>((set, get) => ({
   items: [],
+  totalCount: 0,
   loading: false,
   error: null,
-
+  page: 1,
+  setPage: (page) => {
+    set({ page });
+    const pageSize = 5; // Fixed page size
+    const skip = (page - 1) * pageSize;
+    get().fetchItems(pageSize, skip);
+  },
   addItem: (item) =>
     set((state) => ({
       items: [item, ...state.items],
@@ -33,12 +43,14 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
 
   setError: (error) => set({ error }),
 
-  fetchItems: async () => {
+  fetchItems: async (take = 5, skip = 0) => {
     try {
       set({ loading: true, error: null });
-      const { getItems } = await import("../../app/actions/get-items");
-      const items = await getItems();
-      set({ items, loading: false });
+      const { items, totalCount } = await getItems({
+        take,
+        skip,
+      });
+      set({ items, loading: false, totalCount });
     } catch (error) {
       console.error("Error fetching items:", error);
       set({
