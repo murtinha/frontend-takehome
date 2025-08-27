@@ -30,6 +30,7 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
   addItem: (item) =>
     set((state) => ({
       items: [item, ...state.items],
+      totalCount: state.totalCount + 1,
     })),
 
   updateItem: (id, updates) =>
