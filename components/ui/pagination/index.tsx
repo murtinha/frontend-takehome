@@ -1,10 +1,28 @@
+import { RefObject, useEffect } from "react";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { useItemsStore } from "../../../lib/stores/items-store";
 
-export default function Pagination() {
-  const { totalCount, page, setPage } = useItemsStore();
+interface PaginationProps {
+  listRef: RefObject<HTMLDivElement | null>;
+}
+
+export default function Pagination({ listRef }: PaginationProps) {
+  const { totalCount, page, setPage, loading } = useItemsStore();
 
   const totalPages = Math.ceil(totalCount / 5);
+
+  useEffect(() => {
+    if (!loading && listRef.current) {
+      listRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [loading, listRef]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   return (
     <div className="mt-7 flex">
@@ -17,14 +35,14 @@ export default function Pagination() {
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setPage(page - 1)}
+            onClick={() => handlePageChange(page - 1)}
             disabled={page === 1}
             className="flex items-center gap-2 px-2 py-2 border text-sm font-medium hover:bg-primary-hover disabled:opacity-50"
           >
             <IoChevronBackOutline className="w-4 h-4" />
           </button>
           <button
-            onClick={() => setPage(page + 1)}
+            onClick={() => handlePageChange(page + 1)}
             disabled={page === totalPages}
             className="flex items-center gap-2 px-2 py-2 border text-sm font-medium hover:bg-primary-hover disabled:opacity-50"
           >

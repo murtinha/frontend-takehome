@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useItemGeneration } from "../../lib/hooks/use-item-generation";
 import { useItemsStore } from "../../lib/stores/items-store";
 import ItemCard from "../item-card";
@@ -11,10 +11,18 @@ import Spinner from "../ui/spinner";
 export default function ItemListSection() {
   const { items, loading, error, fetchItems, updateItem } = useItemsStore();
   const { generateItemWithStatus } = useItemGeneration();
+  const listRef = useRef<HTMLDivElement>(null);
+  const heightRef = useRef<number>(0);
 
   useEffect(() => {
     fetchItems(5, 0);
   }, [fetchItems]);
+
+  useEffect(() => {
+    if (!loading && listRef.current) {
+      heightRef.current = listRef.current.offsetHeight;
+    }
+  }, [items, loading]);
 
   const handleRetry = async (itemId: string) => {
     updateItem(itemId, { status: "PENDING" });
@@ -50,7 +58,7 @@ export default function ItemListSection() {
     }
   };
 
-  if (loading) {
+  if (loading && items.length === 0) {
     return (
       <div className="flex w-full px-6 desktop:px-10 flex-col">
         <div className="text-2xl font-bold">Your Items</div>
@@ -83,32 +91,42 @@ export default function ItemListSection() {
       </div>
 
       {hasItems && (
-        <div className="flex flex-col gap-2 mt-10">
-          {items.map((item, index) => (
-            <div key={item.id}>
-              <ItemCard
-                title={item.title}
-                version={item.version}
-                mcVersion={item.mcVersion}
-                language={item.language}
-                downloads={item.downloads}
-                createdAt={item.createdAt}
-                status={mapStatus(item.status)}
-                badges={item.badges}
-                imageSrc={item.image}
-                onRetry={() => handleRetry(item.id)}
-                onDownload={() => handleDownload(item.id)}
-                onRemix={() => handleRemix(item.id)}
-                onEdit={() => handleEdit(item.id)}
-                onPlay={() => handlePlay(item.id)}
-              />
-              <Divider />
+        <div
+          ref={listRef}
+          className="flex flex-col gap-2 mt-10"
+          style={loading ? { minHeight: heightRef.current } : undefined}
+        >
+          {loading ? (
+            <div className="flex justify-center items-center flex-1">
+              <Spinner size="lg" />
             </div>
-          ))}
+          ) : (
+            items.map((item, index) => (
+              <div key={item.id}>
+                <ItemCard
+                  title={item.title}
+                  version={item.version}
+                  mcVersion={item.mcVersion}
+                  language={item.language}
+                  downloads={item.downloads}
+                  createdAt={item.createdAt}
+                  status={mapStatus(item.status)}
+                  badges={item.badges}
+                  imageSrc={item.image}
+                  onRetry={() => handleRetry(item.id)}
+                  onDownload={() => handleDownload(item.id)}
+                  onRemix={() => handleRemix(item.id)}
+                  onEdit={() => handleEdit(item.id)}
+                  onPlay={() => handlePlay(item.id)}
+                />
+                <Divider />
+              </div>
+            ))
+          )}
         </div>
       )}
 
-      {hasItems && <Pagination />}
+      {hasItems && <Pagination listRef={listRef} />}
     </div>
   );
 }
