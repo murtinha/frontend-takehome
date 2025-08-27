@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { useItemsStore } from "../../../lib/stores/items-store";
 
@@ -8,17 +8,19 @@ interface PaginationProps {
 
 export default function Pagination({ listRef }: PaginationProps) {
   const { totalCount, page, setPage, loading } = useItemsStore();
+  const previousPageRef = useRef(page);
 
   const totalPages = Math.ceil(totalCount / 5);
 
   useEffect(() => {
-    if (!loading && listRef.current) {
+    if (!loading && listRef.current && previousPageRef.current !== page) {
       listRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+      previousPageRef.current = page;
     }
-  }, [loading, listRef]);
+  }, [loading, page, listRef]);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
